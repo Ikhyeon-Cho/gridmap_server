@@ -6,11 +6,12 @@ gridmap_server provides the `gridmap_server` ROS Node, which offers grid map dat
 ## 1. Installation
 **Dependencies:** This software is built on the Robotic Operating System ([ROS](https://www.ros.org/)).
 - Ubuntu and ROS. (Tested on [ROS Noetic](https://wiki.ros.org/noetic), Ubuntu 20.04)
-- [grid_map](https://github.com/ANYbotics/grid_map) (grid map C++ library for mobile robots)
+- [grid_map](https://github.com/ANYbotics/grid_map) (Multi-layered grid map C++ library for mobile robots)
 
 **Building:** In order to install the `gridmap_server` package, clone the latest version from this repository into your workspace and compile the package using ROS.
   ```
   cd ~/your-ros-workspace/src
+  sudo apt install ros-noetic-grid-map  # Install grid map library via apt
   git clone https://github.com/Ikhyeon-Cho/gridmap_server.git
   cd ..
   catkin build gridmap_server
@@ -32,4 +33,7 @@ gridmap_server provides the `gridmap_server` ROS Node, which offers grid map dat
 - To be updated
 
 ### 3.2 Grid map
+- To be updated
+
+### 3.3 Cost map
 - To be updated
