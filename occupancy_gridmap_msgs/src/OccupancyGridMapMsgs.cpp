@@ -1,6 +1,6 @@
 #include "occupancy_gridmap_msgs/OccupancyGridMapMsgs.h"
 
-bool OccupancyGridMapMsgs::toOccupancyGridMsg(const OccupancyGridMap& occupancy_map, nav_msgs::OccupancyGrid& msg)
+bool OccupancyGridMapConverter::toOccupancyGridMsg(const OccupancyGridMap& occupancy_map, nav_msgs::OccupancyGrid& msg)
 {
   if (!occupancy_map.hasValidOccupancyLayer())
     return false;
@@ -11,7 +11,11 @@ bool OccupancyGridMapMsgs::toOccupancyGridMsg(const OccupancyGridMap& occupancy_
   return true;
 }
 
-bool OccupancyGridMapMsgs::fromOccupancyGridMsg(const nav_msgs::OccupancyGrid& msg, OccupancyGridMap& occupancy_map)
+bool OccupancyGridMapConverter::fromOccupancyGridMsg(const nav_msgs::OccupancyGrid& msg, OccupancyGridMap& occupancy_map)
 {
-  return grid_map::GridMapRosConverter::fromOccupancyGrid(msg, "occupancy", occupancy_map);
+  auto success = grid_map::GridMapRosConverter::fromOccupancyGrid(msg, "occupancy", occupancy_map);
+  if (success)
+    occupancy_map["occupancy"] /= 100.0;
+
+  return success;
 }

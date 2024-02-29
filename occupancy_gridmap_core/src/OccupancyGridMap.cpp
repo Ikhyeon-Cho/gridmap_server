@@ -42,13 +42,13 @@ std::tuple<float, float> OccupancyGridMap::getMinMaxOccupancyData() const
   return { min_value, max_value };
 }
 
-bool OccupancyGridMap::isOutOfBoundaryAt(const grid_map::Index& grid_index)
+bool OccupancyGridMap::isValidAt(const grid_map::Index& grid_index)
 {
   grid_map::Position pos;
   return !getPosition(grid_index, pos);
 }
 
-bool OccupancyGridMap::isOutOfBoundaryAt(const grid_map::Position& position)
+bool OccupancyGridMap::isValidAt(const grid_map::Position& position)
 {
   return !isInside(position);
 }
@@ -78,7 +78,7 @@ grid_map::Position OccupancyGridMap::getPositionFrom(const grid_map::Index& grid
   return pos;
 }
 
-grid_map::Index OccupancyGridMap::getIndexFrom(const grid_map::Position& grid_position) const
+grid_map::Index OccupancyGridMap::getGridIndexFrom(const grid_map::Position& grid_position) const
 {
   grid_map::Index idx;
   getIndex(grid_position, idx);

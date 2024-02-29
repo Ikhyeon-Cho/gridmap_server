@@ -1,5 +1,5 @@
 /*
- * OccupancyGridMapHelper.h
+ * OccupancyGridMapMsgs.h
  *
  *  Created on: Nov 27, 2023
  *      Author: Ikhyeon Cho
@@ -11,10 +11,10 @@
 #include <grid_map_ros/GridMapRosConverter.hpp>
 #include <nav_msgs/OccupancyGrid.h>
 
-class OccupancyGridMapMsgs
+class OccupancyGridMapConverter
 {
 public:
-static bool toOccupancyGridMsg(const OccupancyGridMap& occupancy_map, nav_msgs::OccupancyGrid& msg);
+  static bool toOccupancyGridMsg(const OccupancyGridMap& occupancy_map, nav_msgs::OccupancyGrid& msg);
 
-static bool fromOccupancyGridMsg(const nav_msgs::OccupancyGrid& msg, OccupancyGridMap& occupancy_map);
+  static bool fromOccupancyGridMsg(const nav_msgs::OccupancyGrid& msg, OccupancyGridMap& occupancy_map);
 };

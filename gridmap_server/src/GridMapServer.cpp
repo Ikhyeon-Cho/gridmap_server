@@ -31,11 +31,11 @@ void GridMapServer::visualizeOccupancyGridMap(const ros::TimerEvent& event)
 {
   // Publish occupancy grid map
   nav_msgs::OccupancyGrid occupancy_gridmap_msg;
-  OccupancyGridMapMsgs::toOccupancyGridMsg(occupancy_map_, occupancy_gridmap_msg);
+  OccupancyGridMapConverter::toOccupancyGridMsg(occupancy_map_, occupancy_gridmap_msg);
   pub_occupancy_gridmap_.publish(occupancy_gridmap_msg);
 
   // Publish inflated occupancy grid map
   nav_msgs::OccupancyGrid inflated_gridmap_msg;
-  OccupancyGridMapMsgs::toOccupancyGridMsg(inflated_map_, inflated_gridmap_msg);
+  OccupancyGridMapConverter::toOccupancyGridMsg(inflated_map_, inflated_gridmap_msg);
   pub_inflated_gridmap_.publish(inflated_gridmap_msg);
 }

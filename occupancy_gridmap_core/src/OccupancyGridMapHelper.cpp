@@ -77,7 +77,7 @@ bool OccupancyGridMapHelper::getInflatedMap(const OccupancyGridMap& map, double 
     {
       const auto& index_to_be_occupied = *iterator;
 
-      if (map_with_inflation.isOutOfBoundaryAt(index_to_be_occupied))
+      if (map_with_inflation.isValidAt(index_to_be_occupied))
         continue;
 
       map_with_inflation.at("occupancy", index_to_be_occupied) = occupied;
