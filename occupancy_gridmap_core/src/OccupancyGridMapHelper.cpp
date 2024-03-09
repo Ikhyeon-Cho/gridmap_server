@@ -57,8 +57,8 @@ bool OccupancyGridMapHelper::getInflatedMap(const OccupancyGridMap& map, double 
   std::queue<grid_map::Index> occupied_indices;
   for (grid_map::GridMapIterator iterator(map); !iterator.isPastEnd(); ++iterator)
   {
-    if (map.isUnknownAt(*iterator))  // skip empty cell (NaN)
-      continue;
+    // if (map.isUnknownAt(*iterator))  // skip empty cell (NaN)
+    //   continue;
 
     if (map.isFreeAt(*iterator))
       continue;

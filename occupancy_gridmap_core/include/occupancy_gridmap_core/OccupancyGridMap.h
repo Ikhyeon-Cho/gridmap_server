@@ -16,9 +16,9 @@
 
 class OccupancyGridMap : public grid_map::GridMap
 {
-  const float OCCUPIED = 1.0;
-  const float FREE = 0.0;
-  const float UNKNOWN = NAN;
+  static constexpr float OCCUPIED = 1.0;
+  static constexpr float FREE = 0.0;
+  static constexpr float UNKNOWN = NAN;
 
 public:
   OccupancyGridMap();

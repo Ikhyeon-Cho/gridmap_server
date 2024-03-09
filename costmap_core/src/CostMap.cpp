@@ -18,6 +18,7 @@ CostMap::CostMap(const OccupancyGridMap& map) : grid_map::GridMap({ "cost_static
 {
   setGeometry(grid_map::Length(map.getLength()), map.getResolution());
   getStaticLayer() = map.getOccupancyLayer() * COST_LETHAL;
+  // OccupancyLayer: NaN for unknown, 0.0 for free, 1.0 for occupied
 }
 
 grid_map::GridMap::Matrix& CostMap::getStaticLayer()
@@ -35,12 +36,12 @@ grid_map::GridMap::Matrix& CostMap::getInflationLayer()
   return get("cost_inflation");
 }
 
-bool CostMap::isValidAt(const grid_map::Position& position)
+bool CostMap::isDefinedAt(const grid_map::Position& position)
 {
   return isInside(position);
 }
 
-bool CostMap::isValidAt(const grid_map::Index& index)
+bool CostMap::isDefinedAt(const grid_map::Index& index)
 {
   grid_map::Position pos;
   return getPosition(index, pos);
@@ -60,7 +61,7 @@ grid_map::Position CostMap::getPositionFrom(const grid_map::Index& index)
   return position;
 }
 
-float CostMap::getDistance(const grid_map::Index& from, const grid_map::Index& to)
+float CostMap::getL2Dist(const grid_map::Index& from, const grid_map::Index& to)
 {
   grid_map::Position from_position, to_position;
   getPosition(from, from_position);
@@ -82,18 +83,13 @@ grid_map::SubmapIterator CostMap::getSquareIterator(const grid_map::Index& query
   return grid_map::SubmapIterator(*this, submap_start_index, submap_buffer_size);
 }
 
-bool CostMap::isEmptyAt(const grid_map::Index& index)
-{
-  return !std::isfinite(at("cost_static", index));
-}
-
 bool CostMap::isLethalAt(const grid_map::Index& index)
 {
   const auto& cost_static = at("cost_static", index);
   return std::abs(cost_static - COST_LETHAL) < 1e-6;
 }
 
-bool CostMap::isFreespaceAt(const grid_map::Index& index)
+bool CostMap::isFreeAt(const grid_map::Index& index)
 {
   const auto& cost_static = at("cost_static", index);
   return std::abs(cost_static - COST_FREESPACE) < 1e-6;

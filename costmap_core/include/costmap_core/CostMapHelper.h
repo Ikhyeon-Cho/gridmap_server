@@ -15,7 +15,8 @@
 class CostMapHelper
 {
 public:
-  static void fromOccupancyGridMap(const OccupancyGridMap& occupancy_map, CostMap& cost_map);
+  static void fromOccupancyGridMap(const OccupancyGridMap& occupancy_map, CostMap& cost_map,
+                                   bool use_unknown_as_free = false);
 };
 
 #endif  // COSTMAP_HELPER_H

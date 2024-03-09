@@ -30,30 +30,29 @@ public:
   grid_map::GridMap::Matrix& getObstacleLayer();
   grid_map::GridMap::Matrix& getInflationLayer();
 
-  bool isValidAt(const grid_map::Position& position);
-  bool isValidAt(const grid_map::Index& index);
-  bool isEmptyAt(const grid_map::Index& index);
+  bool isDefinedAt(const grid_map::Position& position);
+  bool isDefinedAt(const grid_map::Index& index);
 
   bool isLethalAt(const grid_map::Index& index);
-  bool isFreespaceAt(const grid_map::Index& index);
+  bool isFreeAt(const grid_map::Index& index);
 
   grid_map::Index getGridIndexFrom(const grid_map::Position& position);
   grid_map::Position getPositionFrom(const grid_map::Index& index);
-  float getDistance(const grid_map::Index& from, const grid_map::Index& to);
+  float getL2Dist(const grid_map::Index& from, const grid_map::Index& to);
 
   grid_map::CircleIterator getCircleIterator(const grid_map::Index& query_index, double radius) const;
   grid_map::SubmapIterator getSquareIterator(const grid_map::Index& query_index, int search_length) const;
 
   // Grid Index with Cost
-  struct CostComparator
+  struct Cell
   {
     grid_map::Index index;
     float cost;
 
-    CostComparator(grid_map::Index idx, float c) : index(idx), cost(c)
+    Cell(grid_map::Index idx, float c) : index(idx), cost(c)
     {
     }
-    bool operator<(const CostComparator& grid) const
+    bool operator<(const Cell& grid) const
     {
       return this->cost > grid.cost;
     }
